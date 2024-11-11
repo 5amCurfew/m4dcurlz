@@ -1,10 +1,11 @@
 extends Node
 
+const POWER_MULTIPLIER = 5.0  # Adjust as needed for the throw power
+
 var game_controller: Node  # Reference to the GameController
 var drag_start_position: Vector2
 var is_dragging: bool = false
 var stone: RigidBody2D
-const POWER_MULTIPLIER = 5.0  # Adjust as needed for the throw power
 
 # Function to assign the stone dynamically
 func set_stone(stone_instance: RigidBody2D, game_controller_instance: Node):
