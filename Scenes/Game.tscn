@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxiuky1kmas5p"]
+
+[ext_resource type="PackedScene" uid="uid://dst7fhlvht4n6" path="res://Scenes/Player.tscn" id="1_u1t7e"]
+[ext_resource type="Script" path="res://Scripts/GameController.gd" id="3_wo4ix"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gxv87"]
+
+[node name="Game" type="Node2D"]
+
+[node name="GameController" type="Node" parent="."]
+script = ExtResource("3_wo4ix")
+
+[node name="Player" parent="GameController" instance=ExtResource("1_u1t7e")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = -1
+position = Vector2(424, 360)
+scale = Vector2(3, 3)
+shape = SubResource("CircleShape2D_gxv87")
+debug_color = Color(1, 1, 1, 1)

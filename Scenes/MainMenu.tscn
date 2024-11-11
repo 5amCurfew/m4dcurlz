@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1cyjrck5jkjs"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_8txfc"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_8txfc")
+
+[node name="StartButton" type="Button" parent="."]
+offset_left = 356.0
+offset_top = 220.0
+offset_right = 442.0
+offset_bottom = 262.0
+text = "Start"
+
+[node name="QuitButton" type="Button" parent="."]
+offset_left = 353.0
+offset_top = 301.0
+offset_right = 445.0
+offset_bottom = 363.0
+text = "Quit"
