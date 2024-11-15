@@ -3,9 +3,8 @@ extends Node
 @export var team1_color = Color.HOT_PINK  # Red color
 @export var team2_color = Color.AQUA  # Blue color
 
-const STONES_PER_TEAM = 3
+const STONES_PER_TEAM = 2
 const HOUSE = Vector2(424, 360)  # Example target position
-const HOUSE_RADIUS = 300
 
 var current_team = 1  # 1 for team 1, 2 for team 2
 var team1_stones = []
@@ -68,53 +67,34 @@ func end_turn():
 		start_turn()
 
 func calculate_scores():
-	var team1_score = 0
-	var team2_score = 0
-	
 	# Track distances from each stone to the target position
 	var team1_distances = []
 	var team2_distances = []
 	
 	# Calculate distances for team 1 stones within the house
 	for stone in team1_stones:
-		var dist = stone.global_position.distance_to(HOUSE)
-		if dist <= HOUSE_RADIUS:  # Stone is in or touching the house
-			team1_distances.append(dist)
-
+		team1_distances.append(stone.global_position.distance_to(HOUSE))
 	# Calculate distances for team 2 stones within the house
 	for stone in team2_stones:
-		var dist = stone.global_position.distance_to(HOUSE)
-		if dist <= HOUSE_RADIUS:  # Stone is in or touching the house
-			team2_distances.append(dist)
+		team2_distances.append(stone.global_position.distance_to(HOUSE))
 	
-	# Sort distances for easier comparison
 	team1_distances.sort()
 	team2_distances.sort()
+		
+	print(team1_distances)
+	print(team2_distances)
 	
-	# Determine scoring stones
-	var i = 0
-	while i < team1_distances.size() and i < team2_distances.size():
-		if team1_distances[i] < team2_distances[i]:
-			team1_score += 1
-		elif team2_distances[i] < team1_distances[i]:
-			team2_score += 1
-		else:
-			break  # If a stone from both teams is equally close, no more points can be scored
-		i += 1
-
-	# If one team's distances are exhausted first, award points for remaining stones in the other team
-	team1_score += team1_distances.size() - i
-	team2_score += team2_distances.size() - i
-
-	# Output results
-	if team1_score > team2_score:
-		print("Team 1 wins with ", team1_score, " points!")
-	elif team2_score > team1_score:
-		print("Team 2 wins with ", team2_score, " points!")
+	var score: int
+	if team1_distances.min() < team2_distances.min():
+		score = team1_distances.filter(func(d): return d < team2_distances.min()).size()
+	elif team2_distances.min() < team1_distances.min():
+		score = -1*team2_distances.filter(func(d): return d < team1_distances.min()).size()
 	else:
-		print("It's a draw!")
+		score = 0
+	
+	print(score)
 
 # Check for the stone's velocity each frame to see if it has stopped
-func _process(delta):
+func _process(_delta):
 	if stone and not stone.moving and stone.thrown:
 		end_turn()
