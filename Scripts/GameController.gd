@@ -3,7 +3,7 @@ extends Node
 @export var team1_color = Color.HOT_PINK  # Red color
 @export var team2_color = Color.AQUA  # Blue color
 
-const STONES_PER_TEAM = 2
+const STONES_PER_TEAM = 3
 const HOUSE = Vector2(424, 360)  # Example target position
 
 var current_team = 1  # 1 for team 1, 2 for team 2
